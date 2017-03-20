@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+           {%  for product in products %}
+
+                    <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+      <img style="width: 200px ; height: 200px;" src="{{ product.image.url }}" alt="{{ product.name}} ">
+      <div class="caption">
+          <hr>
+        <h3>{{ product.name }}</h3>
+          <hr>
+        <p>{{ product.description | truncatewords:15}}</p>
+          <p><strong>Price {{ product.price }} € </strong> </p>
+        <p><a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary"  title="Add to Cart" role="button">Add TO Cart</a><a href="{% url 'buy_now_stripe' product.id %}" class="btn btn-primary pull-right" role="button">Buy Now</a> </div>
+    </div>
+  </div>
+
+
+
+    {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}

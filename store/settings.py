@@ -39,8 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'index',
-    'products'
+    'products',
+    'accounts',
+    'django_gravatar',
+    'django_forms_bootstrap',
+    'payments',
+    'cart'
+
 ]
 
 MIDDLEWARE = [
@@ -104,6 +109,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.EmailAuth'
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -118,8 +128,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET = os.getenv('STRIPE_SECRET_KEY')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
